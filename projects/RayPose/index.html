@@ -137,7 +137,7 @@
       -->
       <img src="./static/images/teaser.jpg" alt="MY ALT TEXT"/>
       <h2 class="subtitle has-text-centered">
-        We present PBR-SR for physically based rendering (PBR) texture super-resolution, which outputs high-resolution, high-quality PBR textures from low-resolution PBR input in a zero-shot manner.
+        Given a novel object query image, our method accurately predicts the object's 6D pose using a multiview diffusion model conditioned on a set of template images with known poses. Leveraging our proposed structured 2D pose maps, represented as bundles of rays, the diffusion model recovers the query object's pose by progressively denoising these ray bundles.
       </h2>
     </div>
   </div>
@@ -152,15 +152,13 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We present PBR-SR, a novel method for physically based rendering (PBR) texture super resolution (SR). 
-            It outputs high-resolution, high-quality PBR textures from low-resolution (LR) PBR input in a zero-shot manner. 
-            PBR-SR leverages an off-the-shelf super-resolution model trained on natural images, and iteratively minimizes the deviations between super-resolution priors and differentiable renderings. 
-            These enhancements are then back-projected into the PBR map space in a differentiable manner to produce refined, high-resolution textures. 
-            To mitigate view inconsistencies and lighting sensitivity, which is common in view-based super-resolution, our method applies 2D prior constraints across multi-view renderings, iteratively refining the shared, upscaled textures. 
-            In parallel, we incorporate identity constraints directly in the PBR texture domain to ensure the upscaled textures remain faithful to the LR input. 
-            PBR-SR operates without any additional training or data requirements, relying entirely on pretrained image priors. 
-            We demonstrate that our approach produces high-fidelity PBR textures for both artist-designed and AI-generated meshes, outperforming both direct SR models application and prior texture optimization methods. 
-            Our results show high-quality outputs in both PBR and rendering evaluations, supporting advanced applications such as relighting.
+            Typical template-based object pose pipelines first find the closest template and then align it to the current observation.
+            The failure to find the closest template results in the wrong pose estimate. 
+            Instead, we reformulate object pose estimation with template images as a ray alignment problem where viewing directions from multiple posed template views need to mutually align with a non-posed object query. 
+            Inspired by recent advancements in denoising diffusion frameworks for camera pose estimation, we integrate this formulation into a diffusion transformer architecture capable of aligning a single query image of an object with a set of template views. 
+            Our method reparametrizes object rotation by introducing object-centered camera rays and object translation by extending Scale-Invariant Translation Estimation (SITE) to dense translation offsets. 
+            Our method leverages view priors from template images to enhance the model's ability to accurately infer query object poses. Using a coarse-to-fine training strategy with narrowed template sampling, our approach improves performance without modifying the network architecture, increasing robustness in 6D object pose estimation.
+            Extensive evaluations on various benchmark datasets demonstrate the superiority of our method over state-of-the-art approaches in unseen object pose estimation. 
           </p>
         </div>
       </div>
