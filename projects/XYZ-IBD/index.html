@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+    
+    <!-- Primary Meta Tags -->
+    <title>XYZ-IBD: A High-precision Bin-picking Dataset for Object 6D Pose Estimation & Monocular Depth Estimation</title>
+    <meta name="title" content="XYZ-IBD: A High-precision Bin-picking Dataset for Object 6D Pose Estimation & Monocular Depth Estimation">
+    <meta name="description" content="XYZ-IBD is a comprehensive bin-picking dataset for 6D pose estimation and monocular depth estimation, featuring 15 industrial parts, 75 scenes, 22k images, and millimeter-accurate annotations. Part of BOP Challenge 2025 and TRICKY Challenge 2025.">
+    <meta name="keywords" content="XYZ-IBD, bin-picking dataset, 6D pose estimation, depth estimation, computer vision, robotics, industrial automation, object detection, BOP challenge, TRICKY challenge, ICCV 2025, machine learning, computer vision dataset, industrial parts, structured light, laser scanner, stereo camera, millimeter accuracy, synthetic data, CAD models">
+    <meta name="author" content="Junwen Huang, Jizhong Liang, Jiaqi Hu, Martin Sundermeyer, Peter KT Yu, Nassir Navab, Benjamin Busam">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://demianhj.github.io/projects/XYZ-IBD/">
+    <meta property="og:title" content="XYZ-IBD: High-precision Bin-picking Dataset for 6D Pose Estimation & Depth Estimation">
+    <meta property="og:description" content="Comprehensive bin-picking dataset for 6D pose estimation and monocular depth estimation with 15 industrial parts, 75 scenes, and millimeter-accurate annotations.">
+    <meta property="og:image" content="https://demianhj.github.io/projects/images/teaser_v3.png">
+    <meta property="og:site_name" content="XYZ-IBD Dataset">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://demianhj.github.io/projects/XYZ-IBD/">
+    <meta property="twitter:title" content="XYZ-IBD: A High-precision Bin-picking Dataset for Object 6D Pose Estimation & Monocular Depth Estimation">
+    <meta property="twitter:description" content="Comprehensive bin-picking dataset for 6D pose estimation and monocular depth estimation with 15 industrial parts, 75 scenes, and millimeter-accurate annotations.">
+    <meta property="twitter:image" content="https://demianhj.github.io/projects/images/teaser_v3.png">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/png" href="images/xyz.png">
+    <link rel="apple-touch-icon" href="images/xyz.png">
+    <meta name="theme-color" content="#2c3e50">
+    
+    <!-- Google Site Verification -->
+    <!-- <meta name="google-site-verification" content="Rztvg3Y2fxxru0hW2OFVYzRY6hm4vIwit_Bs4-5Q5Lo" /> -->
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "XYZ-IBD: High-precision Bin-picking Dataset",
+        "description": "A comprehensive bin-picking dataset for 6D pose estimation and monocular depth estimation, featuring 15 industrial parts, 75 scenes, 22k images, and millimeter-accurate annotations.",
+        "url": "https://demianhj.github.io/projects/XYZ-IBD/",
+        "identifier": "https://arxiv.org/abs/2506.00599",
+        "keywords": ["bin-picking", "6D pose estimation", "depth estimation", "computer vision", "robotics", "industrial automation"],
+        "license": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+        "creator": {
+            "@type": "Organization",
+            "name": "Technical University of Munich, Munich Center for Machine Learning, Shanghai Jiaotong University, Google, XYZ Robotics"
+        },
+        "citation": {
+            "@type": "CreativeWork",
+            "name": "XYZ-IBD: High-precision Bin-picking Dataset for Object 6D Pose Estimation Capturing Real-world Industrial Complexity",
+            "url": "https://arxiv.org/abs/2506.00599"
+        },
+        "distribution": [
+            {
+                "@type": "DataDownload",
+                "name": "Training Data (PBR-BlenderProc)",
+                "url": "https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/main/xyzibd_train_pbr.zip"
+            },
+            {
+                "@type": "DataDownload", 
+                "name": "Validation Data",
+                "url": "https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/main/xyzibd_val.zip"
+            },
+            {
+                "@type": "DataDownload",
+                "name": "Testing Data", 
+                "url": "https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/main/xyzibd_test_all.zip"
+            }
+        ],
+        "spatialCoverage": {
+            "@type": "Place",
+            "name": "Industrial Environment"
+        },
+        "temporalCoverage": "2025",
+        "variableMeasured": ["6D pose estimation", "depth estimation", "object detection"],
+        "numberOfItems": 22000,
+        "measurementTechnique": ["structured light", "laser scanner", "stereo camera"]
+    }
+    </script>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Fallback for if external resources fail -->
+    <style>
+        /* Fallback styles in case external CSS fails */
+        body { font-family: Arial, sans-serif; }
+        .fas, .fab { display: inline-block; width: 1em; height: 1em; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-main">
+                    <div class="title-section">
+                        <h1>XYZ-IBD</h1>
+                        <p class="subtitle"><b>A High-precision Bin-picking Dataset <br>for Object 6D pose estimation and Monocular Depth Estimation</b></p>
+                    </div>
+                </div>
+                
+                <div class="authors">
+                    <div class="authors-list">
+                        <a href="https://demianjh.github.io/">Junwen Huang</a>,  
+                        Jizhong Liang,  
+                        Jiaqi Hu, 
+                        <a href="https://scholar.google.de/citations?user=LIhGM2YAAAAJ&hl=de">Martin Sundermeyer</a>,  
+                        <a href="https://scholar.google.com/citations?user=a5RZKIkAAAAJ&hl=de">Peter KT Yu</a>,  
+                        <a href="https://www.professoren.tum.de/navab-nassir">Nassir Navab</a>,  
+                        <a href="https://www.cs.cit.tum.de/camp/members/benjamin-busam/">Benjamin Busam</a>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://github.com/GodZarathustra/XYZ-IBD" class="social-link github">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://huggingface.co/datasets/bop-benchmark/xyzibd" target="_blank" rel="noopener noreferrer" class="social-link huggingface">
+                        <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face Logo" width="40" height="35" class="social-icon">
+                        <span>HuggingFace</span>
+                    </a>
+                    <a href="https://arxiv.org/abs/2506.00599" target="_blank" class="social-link paper">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Paper</span>
+                    </a>
+                    <a href="#download" class="social-link download">
+                        <i class="fas fa-download"></i>
+                        <span>Download</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#overview" class="nav-link">Introduction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#benchmarks" class="nav-link">Benchmarks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#download" class="nav-link">Download</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#gallery" class="nav-link">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#citation" class="nav-link">Citation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Affiliation Section -->
+    <section class="affiliation-section">
+        <div class="container">
+            <div class="affiliation">
+                <div class="affiliation-item">
+                    <div class="institution-logo">
+                        <img src="logos/tum.png" alt="TUM Logo" style="max-height: 90px; max-width: 210px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="affiliation-item">
+                    <div class="institution-logo">
+                        <img src="logos/MCML.jpg" alt="MCML Logo" style="max-height: 110px; max-width: 280px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="affiliation-item">
+                    <div class="institution-logo">
+                        <img src="logos/sjtu.png" alt="SJTU Logo" style="max-height: 90px; max-width: 90px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="affiliation-item">
+                    <div class="institution-logo">
+                        <img src="logos/Google_logo.svg.webp" alt="Google Logo" style="max-height: 50px; max-width: 150px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="affiliation-item">
+                    <div class="institution-logo">
+                        <img src="logos/xyz.jpg" alt="XYZ Robotics Logo" style="max-height: 120px; max-width: 300px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="section" id="overview">
+            <h2> Introduction</h2>
+            <p class="overview-paragraph">
+                The XYZ Industrial Bin Picking Dataset (XYZ-IBD) is a bin-picking dataset for <b>6D pose estimation</b> and <b>depth estimation</b>, capturing real-world industrial-grade complexity through <b>challenging geometries, materials, occlusions and clutter</b>. The dataset represents authentic robotic grasping scenarios with <b>millimeter-accurate annotations</b>.
+            </p>
+
+            <div class="image-grid">
+                <div class="image-container">
+                    <img src="images/scenes.png" alt="XYZ-IBD Scenes showing various industrial bin-picking scenarios"> 
+                    <p class="image-caption">XYZ-IBD Scenes</p>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <!-- <i class="fas fa-cube"></i> -->
+                    </div>
+                    <h3>Industrial-grade Complexity</h3>
+                    <p><b>15 highly-reflective industrial parts</b> with various shapes and sizes (diameters ranging 5cm~30cm), <b>presenting challenging occlusions and clutter</b></p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <!-- <i class="fas fa-layer-group"></i> -->
+                    </div>
+                    <h3>Challenging Scenes</h3>
+                    <p><b>75 scenes</b>, 22k RGB/grayscale/depth images and 91k millimeter-level 6D pose annotations, <b>24 instances per scene on average</b>, with up to 60 instances in some scenes</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <!-- <i class="fas fa-camera"></i> -->
+                    </div>
+                    <h3>Advanced Hardwares</h3>
+                    <p>XYZ Robotics DLP <b>structured light</b>, Photoneo PhoXi <b>laser scanner</b>, RealSense D415 <b>stereo camera</b>, that are mounted on a industrial-grade FANUC M10iD/8L robotic arm</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <!-- <i class="fas fa-cogs"></i> -->
+                    </div>
+                    <h3>Synthetic Data</h3>
+                    <p><b>Realistic bin-picking scene simulation</b>, with multiple instances in each scene, rendered with BlenderProc, providing <b>50k+ synthetic training images</b></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="benchmarks">
+            <h2><i class="fas fa-trophy"></i> Benchmarks & Challenges</h2>
+            
+            <div class="benchmarks-grid">
+                <div class="benchmark-card">
+                    <div class="benchmark-header">
+                        <i class="fas fa-industry benchmark-icon"></i>
+                        <h3>BOP Industrial Track</h3>
+                    </div>
+                    <p class="overview-paragraph">
+                        The XYZ-IBD dataset is part of the <b>Benchmark for 6D Object Pose Estimation (BOP)</b> and serves as one of the official BOP-Industrial datasets for the BOP Challenge 2025. 
+                        The XYZ-IBD dataset is evaluated on model-based 2D and 6D object detection tasks, following the BOP Challenge 2025 metrics and is hosted on the official BOP-Industrial Leaderboard. 
+                        The challenge will also be featured at the ICCV 2025 R6D Workshop. 
+                    </p>
+                    <div class="benchmark-links">
+                        <a href="https://bop.felk.cvut.cz/challenges/bop-challenge-2025/" class="benchmark-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>BOP Challenge 2025 Industrial Track</span>
+                        </a>
+                        <a href="https://cmp.felk.cvut.cz/sixd/workshop_2025/" class="benchmark-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>ICCV 2025 Workshop: 10th International Workshop on Recovering 6D Object Pose (R6D)</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="benchmark-card">
+                    <div class="benchmark-header">
+                        <i class="fas fa-eye benchmark-icon"></i>
+                        <h3>TRICKY Monocular Depth Track</h3>
+                    </div>
+                    <p class="overview-paragraph">
+                        The XYZ-IBD dataset is also associated with the <b>Transparent & Reflective Objects In the Wild Challenges (TRICKY)</b> for the Monocular Depth Estimation task. 
+                        Evaluation on XYZ-IBD for this task follows the TRICKY 2025 metrics and is hosted on the official TRICKY 2025 Leaderboard, which will be featured as part of the TRICKY Workshop at ICCV 2025.
+                    </p>
+                    <div class="benchmark-links">
+                        <a href="https://codalab.lisn.upsaclay.fr/competitions/22870" class="benchmark-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>TRICKY challenge 2025 submission system and Leaderboard</span>
+                        </a>
+                        <a href="https://sites.google.com/view/iccv25tricky/home#h.9sn9fynz7to1" class="benchmark-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span>ICCV 2025 Workshop: Transparent & Reflective Objects In the Wild Challenges (TRICKY)</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <br>
+        <section class="section" id="download">
+            <h2><i class="fas fa-download"></i> Download</h2>
+            
+            <div class="download-grid">
+                <div class="download-card">
+                    <div class="download-header">
+                        <i class="fas fa-bullseye download-icon"></i>
+                        <h3>Object 6D Pose Estimation</h3>
+                    </div>
+                    <p class="overview-paragraph">
+                        The pose estimation dataset is available for download at the following links. You can also find the dataset in both the <a href="https://bop.felk.cvut.cz/datasets/">BOP</a> website or <a href="https://huggingface.co/datasets/bop-benchmark/xyzibd/tree/main">HuggingFace</a>.
+                    </p>
+                    <div class="download-links">
+                        <a href="https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/main/xyzibd_train_pbr.zip" class="download-link">
+                            <i class="fas fa-file-archive"></i>
+                            <span>PBR-BlenderProc BOP format training images [Part 1]</span>
+                        </a>
+                        <a href="https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/main/xyzibd_train_pbr_part2.zip" class="download-link">
+                            <i class="fas fa-file-archive"></i>
+                            <span>PBR-BlenderProc BOP format training images [Part 2]</span>
+                        </a>
+                        <a href="https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/main/xyzibd_val.zip" class="download-link">
+                            <i class="fas fa-file-archive"></i>
+                            <span>Validation Data</span>
+                        </a>
+                        <a href="https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/main/xyzibd_test_all.zip" class="download-link">
+                            <i class="fas fa-file-archive"></i>
+                            <span>Testing Data</span>
+                        </a>
+                        <a href="https://huggingface.co/datasets/bop-benchmark/xyzibd/resolve/main/xyzibd_models.zip" class="download-link">
+                            <i class="fas fa-cube"></i>
+                            <span>Object Models</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="download-card">
+                    <div class="download-header">
+                        <i class="fas fa-eye download-icon"></i>
+                        <h3>Depth Estimation</h3>
+                    </div>
+                    <p class="overview-paragraph">
+                        The depth estimation dataset is available for download at the following links. You can also find the dataset in the <a href="https://sites.google.com/view/iccv25tricky/home">TRICKY</a> website.
+                    </p>
+                    <div class="download-links">
+                        <a href="https://1drv.ms/f/c/86b9ea593df47805/Ej28RZ5pJLdNrWqCJsKaSQwB739NpkC4EoBtj2fz2VShLw?e=PeP6Dz" class="download-link">
+                            <i class="fas fa-file-archive"></i>
+                            <span>Real & Synthetic Training Data</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <br>
+        <section class="section" id="gallery">
+            <h2><i class="fas fa-images"></i> Gallery</h2>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/teaser_v3.png" alt="XYZ-IBD Scene Examples showing various industrial bin-picking scenarios"> 
+                    <p class="image-caption"> Scene Examples</p>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/synthetic_images.png" alt="Synthetic images">
+                    <p class="image-caption"> Synthetic Scenes</p>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="images/real_parts_ver.png" alt="Real industrial parts used in XYZ-IBD dataset">
+                    <p class="image-caption"> Real industrial parts</p>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="images/cad_ver.png" alt="CAD models of the industrial parts used in XYZ-IBD dataset">
+                    <p class="image-caption"> CAD models of the industrial parts</p>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="images/hardware.png" alt="Hardware setup used for XYZ-IBD dataset collection">
+                    <p class="image-caption"> Hardware Setup</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="citation">
+            <h2><i class="fas fa-quote-left"></i> Citation & License</h2>
+            
+            <div class="citation-content">
+                <div class="license-info">
+                    <h3><i class="fas fa-gavel"></i> License</h3>
+                    <p class="overview-paragraph">
+                        XYZ-IBD is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="license-link"><i class="fas fa-external-link-alt"></i> CC BY-NC-SA 4.0</a> license.
+                        <b>Custom license available upon request</b>, if you are interested in using the dataset for commercial purposes, please contact us.
+                    </p>
+                </div>
+                
+                <div class="citation-info">
+                    <h3><i class="fas fa-file-alt"></i> Citation</h3>
+                    <p class="overview-paragraph">
+                        If you find this dataset helpful, please cite the following paper:
+                    </p>
+                    <div class="citation">
+                        <div class="citation-header">
+                            <i class="fas fa-quote-right"></i>
+                            <span>BibTeX Citation</span>
+                        </div>
+                        <pre class="citation-code">@misc{huang2025xyzibdhighprecisionbinpickingdataset,
+    title={XYZ-IBD: High-precision Bin-picking Dataset for Object 6D Pose Estimation Capturing Real-world Industrial Complexity}, 
+    author={Junwen Huang and Jizhong Liang and Jiaqi Hu and Martin Sundermeyer and Peter KT Yu and Nassir Navab and Benjamin Busam},
+    year={2025},
+    eprint={2506.00599},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV},
+    url={https://arxiv.org/abs/2506.00599},
+}</pre>
+                        <button class="copy-citation" onclick="copyCitation()">
+                            <i class="fas fa-copy"></i>
+                            <span>Copy Citation</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <h2><i class="fas fa-envelope"></i> Contact</h2>
+            
+            <div class="contact-content">
+                <p class="overview-paragraph">
+                    For any questions or issues regarding the dataset, please contact:
+                </p>
+                
+                <div class="contact-cards">
+                    <div class="contact-card">
+                        <div class="contact-info">
+                            <h3>Junwen Huang</h3>
+                            <p>Technical University of Munich</p>
+                            <a href="mailto:junwen.huang@tum.de" class="contact-link">
+                                <span>junwen.huang@tum.de</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-info">
+                            <h3>Peter KT Yu</h3>
+                            <p>XYZ Robotics</p>
+                            <a href="mailto:peter.yu@xyzrobotics.com" class="contact-link">
+                                <span>peter.yu@xyzrobotics.com</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-note">
+                    <p>For commercial licensing inquiries, please include details about your intended use case.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Mobile navigation toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Copy citation function
+        function copyCitation() {
+            const citationText = `@misc{huang2025xyzibdhighprecisionbinpickingdataset,
+    title={XYZ-IBD: High-precision Bin-picking Dataset for Object 6D Pose Estimation Capturing Real-world Industrial Complexity}, 
+    author={Junwen Huang and Jizhong Liang and Jiaqi Hu and Martin Sundermeyer and Peter KT Yu and Nassir Navab and Benjamin Busam},
+    year={2025},
+    eprint={2506.00599},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV},
+    url={https://arxiv.org/abs/2506.00599},
+}`;
+            
+            navigator.clipboard.writeText(citationText).then(() => {
+                const button = document.querySelector('.copy-citation');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-check"></i><span>Copied!</span>';
+                button.style.backgroundColor = '#27ae60';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.backgroundColor = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy citation: ', err);
+                alert('Failed to copy citation. Please copy manually.');
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation for images
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('load', function() {
+                this.style.opacity = '1';
+            });
+        });
+    </script>
+</body>
+</html>
