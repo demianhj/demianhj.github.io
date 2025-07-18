@@ -655,7 +655,7 @@ section[id] {
     max-width: 2000px;
     width: 100%;
     font-size: clamp(1.5rem, 1.3vw, 1.5rem);
-    color: rgb(7, 226, 241);
+    color: rgb(243, 247, 247);
     text-decoration: bold;
 }
 
