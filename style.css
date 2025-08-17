@@ -211,6 +211,18 @@ img {
     font-weight: 600;
 }
 
+/* Publication link icon */
+.pub-icon {
+    margin-left: 0.4rem;
+    color: #274b8f;
+}
+.pub-icon:hover { color: #1b3773; }
+
+/* Make [link] same size as surrounding text */
+.publication-meta a.external-link {
+    font-size: inherit;
+}
+
 /* List styling */
 ul {
     padding-left: 0;
