@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Junwen Huang - Homepage</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=teasers-1">
     <meta name="keywords" content="Junwen, Junwen Huang, Junwen Huang TUM, Junwen Huang PhD, Junwen Huang Computer Vision, Junwen Huang Robotics, Junwen Huang TUM, Junwen Huang CAMP, Junwen Huang Nassir Navab, Junwen Huang Benjamin Busam, Junwen Huang Peter KT Yu, Junwen Huang XYZ Robotics">
     <meta name="description" content="Junwen Huang's homepage, PhD for Computer Vision for AI & Robotics at Technical University of Munich, School of CIT, CAMP Chair.">
     <meta name="author" content="Junwen Huang">
@@ -71,6 +71,18 @@
 
 </head>
 <body>
+    <header class="site-header" role="banner">
+        <div class="nav-inner">
+            <a class="brand" href="/">Junwen Huang</a>
+            <nav class="nav-links" aria-label="Primary">
+                <a href="#about">About</a>
+                <a href="#activities">Activities</a>
+                <a href="#publications">Publications</a>
+                <a href="#projects">Student Projects</a>
+            </nav>
+        </div>
+    </header>
+
     <div class="container">
 
         <aside class="sidebar">
@@ -96,7 +108,7 @@
 
         <main class="main-content">
             <!-- About Section -->
-            <section class="section about-section">
+            <section class="section about-section" id="about">
                 <h2>About Me</h2>
                 <p> I am a PhD researcher at Technical University of Munich(TUM),  specializing in 3D vision
                     for scene understanding, reconstruction, and object pose estimation/tracking, enabling models to
@@ -111,7 +123,7 @@
             </section>
 
             <!-- Research Interests -->
-            <section class="section">
+            <section class="section" id="interests">
                 <h2>Research Interests</h2>
                 <ul>
                           <li>3D Scene Understanding & Reconstruction</li>
@@ -121,7 +133,7 @@
                 </ul>
             </section>
 
-            <section class="section">
+            <section class="section" id="activities">
                 <h2>Professional Activities</h2>
                 <br>
                 <h3>Co-organized Workshops and Challenges</h3>
@@ -152,7 +164,7 @@
             </section>
 
             <!-- Publications -->
-            <section class="section">
+            <section class="section" id="publications">
                 <h2>Selected Publications</h2>
 
                 <div class="publication-item">
@@ -205,7 +217,7 @@
                 </div>
 
                 <div class="publication-item">
-                    <img src="web_pic/alignist.png" alt="Alignist teaser" class="publication-image">
+                    <img src="web_pic/alignist.png" alt="Alignist teaser" class="publication-image publication-image--small">
                     <div class="publication-info">
                         <div class="publication-title">Alignist: CAD-Informed Orientation Distribution Estimation by Fusing Shape and Correspondences</div>
                         <p class="publication-authors">Shishir Reddy Vutukur, Rasmus Laurvig Haugaard, <strong>Junwen Huang</strong>, Benjamin Busam, Tolga Birdal</p>
@@ -229,7 +241,7 @@
                 </div>
 
                 <div class="publication-item">
-                    <img src="web_pic/ssr2d.png" alt="SSR-2D teaser" class="publication-image">
+                    <img src="web_pic/ssr2d.png" alt="SSR-2D teaser" class="publication-image publication-image--small">
                     <div class="publication-info">
                         <div class="publication-title">SSR-2D: Semantic 3D Scene Reconstruction from 2D Images</div>
                         <p class="publication-authors"><strong>Junwen Huang</strong>, Alexey Artemov, Yujin Chen, Shuaifeng Zhi, Kai Xu, Matthias Nießner</p>
@@ -266,7 +278,7 @@
                 </div>
             </section>
             
-            <section class="section">
+            <section class="section" id="projects">
                 <h2>Supervised Student Projects</h2>
                 <br>
                 <ul>

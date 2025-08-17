@@ -29,6 +29,51 @@ body {
     font-size: 16px;
 }
 
+/* Top navigation */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #ffffffcc;
+    backdrop-filter: saturate(150%) blur(6px);
+    border-bottom: 1px solid #eaeaea;
+}
+
+.nav-inner {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+}
+
+.brand {
+    font-weight: 700;
+    color: #1b1b1b;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links a {
+    color: #333;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.nav-links a:hover {
+    background: #f2f2f2;
+}
+
+/* Offset anchors for sticky header */
+:target {
+    scroll-margin-top: 64px;
+}
+
 img {
     display: block;
     max-width: 100%;
@@ -113,11 +158,16 @@ img {
 }
 
 .publication-image {
-    width: 120px;
+    width: 200px;
     height: auto;
     flex-shrink: 0;
     border-radius: 4px;
     object-fit: cover;
+}
+
+/* Smaller teaser for specific papers */
+.publication-image--small {
+    width: 140px;
 }
 
 .publication-info {
@@ -176,14 +226,20 @@ li {
 /* Specific styling for contact list */
 .contact-list {
     list-style: none;
+    margin: 0 auto;
+    display: inline-block;
 }
 
 .contact-list li {
-    padding-left: 0.5rem;  /* Less indent for contact items */
+    padding-left: 0;  /* remove left indent for tighter centering */
     margin-bottom: 0.8rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+.contact-section {
+    text-align: center;
 }
 
 /* Research list styling */
@@ -238,6 +294,14 @@ a:hover {
 
     .publication-item {
         padding: 1rem 0;
+    }
+
+    .publication-image {
+        width: 140px;
+    }
+
+    .publication-image--small {
+        width: 110px;
     }
 }
 
