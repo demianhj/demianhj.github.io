@@ -204,33 +204,36 @@ Cal("init", { origin: "https://cal.com" });
 const CAL_LINK = "junwen-h-y39uce";
 
 const savedLang = localStorage.getItem("bookingLang") || "zh";
+const savedTz = localStorage.getItem("bookingTz") || "";
 
-Cal("inline", {
-  elementOrSelector: "#my-cal-inline",
-  calLink: CAL_LINK,
-  layout: "month_view",
-  config: {
-    theme: "light",
+/* ---------- 2. 渲染日历（可带时区） ---------- */
+function renderCal(tz) {
+  const container = document.getElementById("my-cal-inline");
+  container.innerHTML = "";
+
+  const config = { theme: "light", layout: "month_view" };
+  if (tz) config.timeZone = tz;
+
+  Cal("inline", {
+    elementOrSelector: "#my-cal-inline",
+    calLink: CAL_LINK,
+    layout: "month_view",
+    config: config
+  });
+
+  Cal("ui", {
+    hideEventTypeDetails: false,
     layout: "month_view"
-  }
-});
-
-Cal("ui", {
-  hideEventTypeDetails: false,
-  layout: "month_view"
-});
+  });
+}
 
 /* ---------- 3. 时区快捷选择 ---------- */
 function applyTimezone(tz) {
-  Cal("ui", {
-    hideEventTypeDetails: false,
-    layout: "month_view",
-    timeZone: tz
-  });
   document.querySelectorAll(".tz-btn").forEach(function (b) {
     b.classList.toggle("active", b.getAttribute("data-tz") === tz);
   });
   localStorage.setItem("bookingTz", tz);
+  renderCal(tz);
 }
 
 document.querySelectorAll(".tz-btn").forEach(function (b) {
@@ -239,9 +242,13 @@ document.querySelectorAll(".tz-btn").forEach(function (b) {
   });
 });
 
-/* 如果访客之前选过时区就恢复；否则让 Cal 自动按浏览器时区 */
-var savedTz = localStorage.getItem("bookingTz");
-if (savedTz) applyTimezone(savedTz);
+/* 首次渲染：有保存过的时区就用它，否则让 Cal 自动按浏览器时区 */
+renderCal(savedTz);
+if (savedTz) {
+  document.querySelectorAll(".tz-btn").forEach(function (b) {
+    b.classList.toggle("active", b.getAttribute("data-tz") === savedTz);
+  });
+}
 
 setLang(savedLang);
 </script>
